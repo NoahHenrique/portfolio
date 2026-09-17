@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah | Portfólio Pessoal</title>
+
+    <!--
+        ======================================================================
+        FONTES DO GOOGLE FONTS
+        - Space Grotesk: Para títulos e elementos de destaque com visual moderno.
+        - Inter: Para textos corridos, garantindo legibilidade limpa e técnica.
+        ======================================================================
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /*
+            ==================================================================
+            VARIÁVEIS DE COR E CONFIGURAÇÕES BASE (:root)
+            Conceito: Tecnologia + Natureza (Branco, Verde, Azul e Destaques)
+            ==================================================================
+        */
+        :root {
+            --fundo: #F7FAF7;
+            --papel: #FFFFFF;
+            --texto: #10251A;
+            --verde: #2F6B3F;
+            --verde-claro: #A7C4A0;
+            --azul: #247BA0;
+            --azul-claro: #DCEFF5;
+            --destaque: #E0A526;
+            --borda: #10251A;
+
+            --fonte-titulo: 'Space Grotesk', sans-serif;
+            --fonte-corpo: 'Inter', sans-serif;
+        }
+
+        /* Reset global e caixa padrão */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Rolagem suave para navegação entre seções */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /*
+            ==================================================================
+            ESTILO DO CORPO E ATMOSFERA VISUAL
+            Subtis elementos orgânicos no fundo sem sobrecarregar a página.
+            ==================================================================
+        */
+        body {
+            background-color: var(--fundo);
+            color: var(--texto);
+            font-family: var(--fonte-corpo);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mancha orgânica sutil no topo do fundo */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: var(--verde-claro);
+            opacity: 0.15;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Mancha orgânica azul sutil na lateral */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: -150px;
+            width: 450px;
+            height: 450px;
+            background: var(--azul-claro);
+            opacity: 0.4;
+            border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /*
+            ==================================================================
+            BARRA DE PROGRESSO DE ROLAGEM NO TOPO
+            ==================================================================
+        */
+        #progresso-barra {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--verde);
+            width: 0%;
+            z-index: 2000;
+            transition: width 0.1s ease-out;
+        }
+
+        /*
+            ==================================================================
+            MENU DE NAVEGAÇÃO FIXO
+            ==================================================================
+        */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(16, 37, 26, 0.08);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--texto);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--verde);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--fonte-titulo);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--texto);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--verde);
+        }
+
+        /* Ponto indicativo discreto no hover dos links */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--verde);
+            transition: width 0.2s ease, left 0.2s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Botão do Menu Hambúrguer (Mobile) */
+        .hamburger {
+            display: none;
+            background: none;
+            border: 1px solid var(--borda);
+            border-radius: 6px;
+            padding: 0.4rem 0.7rem;
+            font-family: var(--fonte-titulo);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--texto);
+            cursor: pointer;
+        }
+
+        /*
+            ==================================================================
+            ESTRUTURA GERAL E SEÇÕES
+            ==================================================================
+        */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        /* Títulos padrão de seção no estilo editorial */
+        .section-header {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--texto);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(16, 37, 26, 0.1);
+            margin-left: 1rem;
+        }
+
+        /*
+            ==================================================================
+            1. HERO SECTION
+            ==================================================================
+        */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: calc(85vh - 80px);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .tag-etiqueta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.15);
+            padding: 0.35rem 0.8rem;
+            border-radius: 50px;
+            font-family: var(--fonte-titulo);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--verde);
+            width: fit-content;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .hero-title {
+            font-family: var(--fonte-titulo);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+            color: var(--texto);
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.2rem 0;
+        }
+
+        .badge-item {
+            font-family: var(--fonte-titulo);
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--azul-claro);
+            color: var(--azul);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .hero-frase {
+            font-size: 1.15rem;
+            color: var(--texto);
+            opacity: 0.9;
+            font-weight: 500;
+            border-left: 3px solid var(--verde);
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .hero-definidores {
+            font-family: var(--fonte-titulo);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--verde);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Botões Estilizados */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fonte-titulo);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            padding: 0.85rem 1.6rem;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background-color: var(--verde);
+            color: var(--papel);
+            border: 1px solid var(--verde);
+            box-shadow: 0 4px 12px rgba(47, 107, 63, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #245431;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(47, 107, 63, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--papel);
+            color: var(--texto);
+            border: 1px solid var(--borda);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--fundo);
+            border-color: var(--verde);
+            color: var(--verde);
+            transform: translateY(-2px);
+        }
+
+        /* VISUAL DO HERO: PLACEHOLDER ORGÂNICO PARA FOTO */
+        .hero-visual-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Elemento decorativo sutil atrás da foto */
+        .hero-bg-blob {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: var(--verde-claro);
+            opacity: 0.35;
+            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        /* Frame orgânico em formato de folha/bolha */
+        .hero-photo-card {
+            position: relative;
+            z-index: 2;
+            width: 290px;
+            height: 340px;
+            background: var(--papel);
+            border: 2px solid var(--verde);
+            border-radius: 40px 120px 40px 120px;
+            box-shadow: 0 12px 30px rgba(16, 37, 26, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            user-select: none;
+        }
+
+        /*
+            ==================================================================
+            INSTRUÇÕES PARA INSERIR A FOTO REAL DE NOAH POSTERIORMENTE:
+            Para trocar este placeholder por uma foto real, substitua o elemento
+            <div class="photo-placeholder-avatar"> pelo seguinte código HTML:
+            <img src="caminho-da-sua-foto.jpg" alt="Foto de Noah" class="photo-real-img">
+            E adicione no CSS:
+            .photo-real-img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+            ==================================================================
+        */
+        .photo-placeholder-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--azul-claro);
+            border: 2px dashed var(--azul);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fonte-titulo);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .photo-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .photo-card-name {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--texto);
+        }
+
+        .photo-card-sub {
+            font-family: var(--fonte-titulo);
+            font-size: 0.8rem;
+            color: var(--verde);
+            font-weight: 600;
+        }
+
+        /* Detalhes aquáticos/orgânicos ao redor */
+        .nature-accent-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--destaque);
+            border-radius: 50%;
+            top: 20px;
+            right: 30px;
+        }
+
+        /*
+            ==================================================================
+            2. SOBRE MIM + FICHA
+            ==================================================================
+        */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .sobre-textos {
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .sobre-textos p {
+            font-size: 1rem;
+            color: var(--texto);
+            line-height: 1.7;
+        }
+
+        /* Ficha Lateral */
+        .ficha-card {
+            background: var(--verde-claro);
+            background: linear-gradient(135deg, var(--verde-claro) 0%, #c4dfbd 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(47, 107, 63, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .ficha-item {
+            border-bottom: 1px solid rgba(16, 37, 26, 0.15);
+            padding-bottom: 0.6rem;
+        }
+
+        .ficha-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .ficha-label {
+            font-family: var(--fonte-titulo);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--verde);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: block;
+        }
+
+        .ficha-valor {
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--texto);
+        }
+
+        /*
+            ==================================================================
+            3. TRÊS COISAS QUE ME DEFINEM (FUTEBOL, CRIATIVIDADE, ACADEMIA)
+            ==================================================================
+        */
+        .pilares-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .pilar-card {
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .pilar-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--verde);
+        }
+
+        .pilar-num {
+            font-family: var(--fonte-titulo);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--azul);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 0.8rem;
+        }
+
+        .pilar-titulo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--texto);
+            margin-bottom: 0.5rem;
+        }
+
+        .pilar-desc {
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.85;
+        }
+
+        /* Formas visuais inspiradas em elementos naturais/movimento */
+        .pilar-shape-svg {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 70px;
+            height: 70px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        /*
+            ==================================================================
+            4. MINHAS ENTREGAS (GRADE ASIMÉTRICA ESTILO PORTFÓLIO VISUAL)
+            ==================================================================
+        */
+        .entregas-intro {
+            font-size: 1.05rem;
+            color: var(--texto);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        /* Grid assimétrico para os 5 projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Configuração assimétrica dos cards */
+        .project-card {
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.12);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        /* Linha verde decorativa oculta que aparece no hover */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: var(--verde);
+            transition: width 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            width: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(16, 37, 26, 0.08);
+            border-color: rgba(47, 107, 63, 0.3);
+        }
+
+        /* Tamanhos na grade assimétrica */
+        .card-p1 { grid-column: span 7; }
+        .card-p2 { grid-column: span 5; }
+        .card-p3 { grid-column: span 4; }
+        .card-p4 { grid-column: span 4; }
+        .card-p5 { grid-column: span 4; }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-number {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--verde);
+            line-height: 1;
+        }
+
+        .project-status {
+            font-family: var(--fonte-titulo);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .status-concluida {
+            background-color: rgba(47, 107, 63, 0.1);
+            color: var(--verde);
+            border: 1px solid rgba(47, 107, 63, 0.2);
+        }
+
+        .status-em-breve {
+            background-color: rgba(36, 123, 160, 0.1);
+            color: var(--azul);
+            border: 1px dashed rgba(36, 123, 160, 0.3);
+        }
+
+        .project-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-family: var(--fonte-titulo);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--texto);
+            margin-bottom: 0.4rem;
+        }
+
+        .project-date {
+            font-family: var(--fonte-titulo);
+            font-size: 0.75rem;
+            color: var(--azul);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--texto);
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .project-footer {
+            padding-top: 1rem;
+            border-top: 1px solid rgba(16, 37, 26, 0.08);
+        }
+
+        .project-btn {
+            font-family: var(--fonte-titulo);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--verde);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .project-btn:hover {
+            color: #1b4226;
+            transform: translateX(4px);
+        }
+
+        /* Estilo visual para projetos "EM BREVE" (bloqueados) */
+        .project-locked {
+            opacity: 0.7;
+            background-color: #f2f6f3;
+        }
+
+        .project-locked:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(16, 37, 26, 0.12);
+        }
+
+        .project-locked:hover::before {
+            width: 0%;
+        }
+
+        /*
+            ==================================================================
+            5. SEÇÃO MANIFESTO (EDITORIAL COM FAIXA LATERAL E FRASE EM DESTAQUE)
+            ==================================================================
+        */
+        .manifesto-wrapper {
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 8px 1fr;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .manifesto-faixa {
+            background: var(--verde-claro);
+        }
+
+        .manifesto-body {
+            padding: 3.5rem 3rem;
+            max-width: 850px;
+        }
+
+        .manifesto-paragrafo {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--texto);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Frase em destaque no meio do manifesto */
+        .manifesto-destaque-box {
+            margin: 2.5rem 0;
+            padding: 1.5rem 2rem;
+            background: var(--fundo);
+            border-left: 4px solid var(--verde);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .manifesto-destaque-texto {
+            font-family: var(--fonte-titulo);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--verde);
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        /*
+            ==================================================================
+            6. SEÇÃO CONTATO
+            ==================================================================
+        */
+        .contato-box {
+            background: var(--papel);
+            border: 1px solid rgba(16, 37, 26, 0.1);
+            border-radius: 12px;
+            padding: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .contato-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .contato-nome {
+            font-family: var(--fonte-titulo);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--texto);
+            line-height: 1;
+        }
+
+        .contato-detalhe {
+            font-family: var(--fonte-titulo);
+            font-size: 0.9rem;
+            color: var(--verde);
+            font-weight: 600;
+        }
+
+        .contato-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contato-link-item {
+            font-family: var(--fonte-titulo);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--texto);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .contato-link-item:hover {
+            color: var(--verde);
+        }
+
+        /*
+            ==================================================================
+            7. RODAPÉ (FOOTER)
+            ==================================================================
+        */
+        footer {
+            background: var(--papel);
+            border-top: 2px solid var(--verde-claro);
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--texto);
+        }
+
+        .footer-nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-nav-links a {
+            font-family: var(--fonte-titulo);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--texto);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav-links a:hover {
+            color: var(--verde);
+        }
+
+        /*
+            ==================================================================
+            8. ANIMAÇÕES E ACESSIBILIDADE
+            ==================================================================
+        */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Acessibilidade: Estilo para navegação por teclado (:focus-visible) */
+        :focus-visible {
+            outline: 3px solid var(--verde) !important;
+            outline-offset: 3px !important;
+        }
+
+        /* Suporte para usuários com preferência de redução de movimento */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .hero-bg-blob, .hero-photo-card, .project-card {
+                transition: none !important;
+            }
+        }
+
+        /*
+            ==================================================================
+            9. RESPONSIVIDADE (MEDIA QUERIES PARA DIVERSAS TELAS)
+            ==================================================================
+        */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.8rem;
+            }
+            .card-p1, .card-p2, .card-p3, .card-p4, .card-p5 {
+                grid-column: span 6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding-top: 5rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: left;
+            }
+
+            .hero-title {
+                font-size: 3.2rem;
+            }
+
+            .sobre-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pilares-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-p1, .card-p2, .card-p3, .card-p4, .card-p5 {
+                grid-column: span 12;
+            }
+
+            .manifesto-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .manifesto-destaque-texto {
+                font-size: 1.3rem;
+            }
+
+            /* Ativação do Menu Hambúrguer Móvel */
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--papel);
+                border-bottom: 1px solid rgba(16, 37, 26, 0.1);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.2rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-title {
+                font-size: 2.6rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .contato-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE PROGRESSO DE ROLAGEM -->
+    <div id="progresso-barra" aria-hidden="true"></div>
+
+    <!-- CABEÇALHO / MENU DE NAVEGAÇÃO -->
+    <header class="header-nav">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <span class="brand-dot"></span>
+                NOAH
+            </a>
+
+            <button class="hamburger" id="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
+                MENU ☰
+            </button>
+
+            <nav>
+                <ul class="nav-links" id="nav-lista">
+                    <li><a href="#sobre">SOBRE</a></li>
+                    <li><a href="#entregas">ENTREGAS</a></li>
+                    <li><a href="#manifesto">MANIFESTO</a></li>
+                    <li><a href="#contato">CONTATO</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL DO SITE -->
+    <main>
+
+        <!-- 1. HERO SECTION -->
+        <section class="hero-grid reveal" id="hero">
+            <div class="hero-content">
+                <span class="tag-etiqueta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"/></svg>
+                    PORTFÓLIO PESSOAL · 2026
+                </span>
+                
+                <h1 class="hero-title">NOAH.</h1>
+                
+                <div class="hero-badges">
+                    <span class="badge-item">15 ANOS</span>
+                    <span class="badge-item">VARGINHA — MG</span>
+                    <span class="badge-item">TÉCNICO EM T.I.</span>
+                </div>
+
+                <p class="hero-frase">"Aprender, criar e construir meu próprio caminho."</p>
+
+                <div class="hero-definidores">
+                    Futebol · Criatividade · Academia
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#entregas" class="btn btn-primary">VER MINHAS ENTREGAS</a>
+                    <a href="#sobre" class="btn btn-secondary">SOBRE MIM</a>
+                </div>
+            </div>
+
+            <!-- VISUAL DO HERO COM PLACEHOLDER EM FORMATO ORGÂNICO -->
+            <div class="hero-visual-wrapper">
+                <div class="hero-bg-blob" id="bgBlob"></div>
+                <div class="hero-photo-card" id="photoCard">
+                    <div class="nature-accent-dot"></div>
+                    <div class="photo-placeholder-avatar">N</div>
+                    <div class="photo-card-info">
+                        <span class="photo-card-name">NOAH</span>
+                        <span class="photo-card-sub">15 ANOS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SOBRE MIM -->
+        <section class="reveal" id="sobre">
+            <h2 class="section-header">01 — SOBRE MIM</h2>
+
+            <div class="sobre-grid">
+                <div class="sobre-textos">
+                    <p>Meu nome é Noah, tenho 15 anos e moro em Varginha, no bairro Jardim Renata. Atualmente faço o curso técnico em Tecnologia da Informação e estou conhecendo melhor as possibilidades que a tecnologia pode oferecer. Gosto de aprender coisas novas, criar projetos e experimentar ideias diferentes enquanto descubro o que realmente combina comigo.</p>
+                    <p>Além da tecnologia, três coisas fazem parte de quem eu sou: futebol, criatividade e academia. Cada uma delas representa uma parte diferente da minha personalidade e da minha rotina. Este portfólio é uma forma de reunir minhas entregas, mostrar um pouco de quem eu sou e registrar uma parte do caminho que estou construindo.</p>
+                </div>
+
+                <!-- FICHA PESSOAL -->
+                <aside class="ficha-card">
+                    <div class="ficha-item">
+                        <span class="ficha-label">NOME</span>
+                        <span class="ficha-valor">NOAH</span>
+                    </div>
+                    <div class="ficha-item">
+                        <span class="ficha-label">IDADE</span>
+                        <span class="ficha-valor">15 ANOS</span>
+                    </div>
+                    <div class="ficha-item">
+                        <span class="ficha-label">CIDADE</span>
+                        <span class="ficha-valor">VARGINHA — MG</span>
+                    </div>
+                    <div class="ficha-item">
+                        <span class="ficha-label">BAIRRO</span>
+                        <span class="ficha-valor">JARDIM RENATA</span>
+                    </div>
+                    <div class="ficha-item">
+                        <span class="ficha-label">CURSO</span>
+                        <span class="ficha-valor">TÉCNICO EM T.I.</span>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- TRÊS COISAS QUE ME DEFINEM -->
+            <div class="pilares-grid">
+                <article class="pilar-card">
+                    <div class="pilar-num">01</div>
+                    <h3 class="pilar-titulo">FUTEBOL</h3>
+                    <p class="pilar-desc">"Uma das coisas que faz parte da minha rotina e dos meus interesses."</p>
+                    <!-- Forma fluida discreta em SVG -->
+                    <svg class="pilar-shape-svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="#10251A" stroke-width="6" fill="none"/></svg>
+                </article>
+
+                <article class="pilar-card">
+                    <div class="pilar-num">02</div>
+                    <h3 class="pilar-titulo">CRIATIVIDADE</h3>
+                    <p class="pilar-desc">"Uma parte importante da forma como gosto de pensar e criar."</p>
+                    <svg class="pilar-shape-svg" viewBox="0 0 100 100"><path d="M10 50 Q 50 10, 90 50 T 10 50" stroke="#10251A" stroke-width="6" fill="none"/></svg>
+                </article>
+
+                <article class="pilar-card">
+                    <div class="pilar-num">03</div>
+                    <h3 class="pilar-titulo">ACADEMIA</h3>
+                    <p class="pilar-desc">"Um interesse que faz parte da minha rotina."</p>
+                    <svg class="pilar-shape-svg" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" stroke="#10251A" stroke-width="6" fill="none"/></svg>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. MINHAS ENTREGAS -->
+        <section class="reveal" id="entregas">
+            <h2 class="section-header">02 — MINHAS ENTREGAS</h2>
+            <p class="entregas-intro">"Cada entrega representa uma parte do que estou aprendendo e descobrindo durante minha formação."</p>
+
+            <div class="projects-grid">
+                
+                <!-- PROJETO 01 -->
+                <article class="project-card card-p1">
+                    <div class="project-header">
+                        <span class="project-number">01</span>
+                        <span class="project-status status-concluida">CONCLUÍDA</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">CAPA DO MEU ÁLBUM</h3>
+                        <span class="project-date">Data: [PREENCHER DATA]</span>
+                        <p class="project-desc">"Uma experiência para transformar uma ideia pessoal em uma composição visual."</p>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://github.com/NoahHenrique" target="_blank" rel="noopener noreferrer" class="project-btn">
+                            VER PROJETO →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJETO 02 -->
+                <article class="project-card card-p2">
+                    <div class="project-header">
+                        <span class="project-number">02</span>
+                        <span class="project-status status-concluida">CONCLUÍDA</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">DASHBOARD QUEM SOU EU</h3>
+                        <span class="project-date">Data: [PREENCHER DATA]</span>
+                        <p class="project-desc">"Aprendi a organizar informações sobre mim de maneira visual e fácil de entender."</p>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://github.com/NoahHenrique" target="_blank" rel="noopener noreferrer" class="project-btn">
+                            VER PROJETO →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJETO 03 -->
+                <article class="project-card card-p3 project-locked">
+                    <div class="project-header">
+                        <span class="project-number">03</span>
+                        <span class="project-status status-em-breve">EM BREVE</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">ÁRVORE DAS PROFISSÕES 2.0</h3>
+                        <span class="project-date">Data: [PREENCHER DATA]</span>
+                        <p class="project-desc">"Uma atividade para explorar possibilidades profissionais e pensar sobre meu futuro."</p>
+                    </div>
+                    <div class="project-footer">
+                        <span style="font-family: var(--fonte-titulo); font-size: 0.8rem; color: var(--azul);">EM DESENVOLVIMENTO</span>
+                    </div>
+                </article>
+
+                <!-- PROJETO 04 -->
+                <article class="project-card card-p4 project-locked">
+                    <div class="project-header">
+                        <span class="project-number">04</span>
+                        <span class="project-status status-em-breve">EM BREVE</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">ÂNCORAS DE CARREIRA</h3>
+                        <span class="project-date">Data: [PREENCHER DATA]</span>
+                        <p class="project-desc">"Uma atividade para refletir sobre escolhas, interesses e caminhos profissionais."</p>
+                    </div>
+                    <div class="project-footer">
+                        <span style="font-family: var(--fonte-titulo); font-size: 0.8rem; color: var(--azul);">EM DESENVOLVIMENTO</span>
+                    </div>
+                </article>
+
+                <!-- PROJETO 05 -->
+                <article class="project-card card-p5">
+                    <div class="project-header">
+                        <span class="project-number">05</span>
+                        <span class="project-status status-concluida">CONCLUÍDA</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">MANIFESTO</h3>
+                        <span class="project-date">Data: [PREENCHER DATA]</span>
+                        <p class="project-desc">"Um espaço para colocar em palavras o que penso sobre meu caminho e meu futuro."</p>
+                    </div>
+                    <div class="project-footer">
+                        <a href="#manifesto" class="project-btn">
+                            LER MANIFESTO →
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 4. MANIFESTO -->
+        <section class="reveal" id="manifesto">
+            <h2 class="section-header">03 — MANIFESTO</h2>
+
+            <div class="manifesto-wrapper">
+                <div class="manifesto-faixa"></div>
+                <div class="manifesto-body">
+                    <p class="manifesto-paragrafo">Eu ainda estou descobrindo muita coisa sobre mim e sobre o que quero fazer no futuro. Tenho 15 anos e sei que ainda existe muito caminho pela frente, mas acredito que cada experiência pode me ajudar a entender melhor quem eu sou.</p>
+                    
+                    <p class="manifesto-paragrafo">A tecnologia entrou na minha rotina através dos estudos e do curso técnico em Tecnologia da Informação. Ainda estou conhecendo diferentes áreas e possibilidades, então não quero fingir que já tenho todas as respostas. Quero aprender, testar, errar, corrigir e continuar descobrindo aquilo que realmente combina comigo.</p>
+                    
+                    <!-- FRASE EM DESTAQUE -->
+                    <div class="manifesto-destaque-box">
+                        <p class="manifesto-destaque-texto">"AINDA ESTOU DESCOBRINDO O PRÓXIMO PASSO."</p>
+                    </div>
+
+                    <p class="manifesto-paragrafo">Futebol, criatividade e academia também fazem parte da minha rotina e mostram lados diferentes de quem eu sou. O futebol representa uma coisa que gosto de acompanhar e viver; a criatividade aparece quando tenho uma ideia e quero transformá-la em alguma coisa; e a academia representa uma parte da minha rotina.</p>
+                    
+                    <p class="manifesto-paragrafo">Não sei exatamente onde estarei daqui a alguns anos, e acho que tudo bem. Neste momento, prefiro continuar aprendendo e aproveitar as oportunidades que aparecem. Quero olhar para trás no futuro e perceber que cada projeto, cada tentativa e cada descoberta ajudaram a construir meu caminho.</p>
+                    
+                    <p class="manifesto-paragrafo">Este portfólio é apenas uma parte disso. Ele não precisa mostrar alguém que já sabe tudo. Quero que ele mostre alguém que está aprendendo, experimentando e descobrindo o próximo passo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTATO -->
+        <section class="reveal" id="contato">
+            <h2 class="section-header">04 — CONTATO</h2>
+
+            <div class="contato-box">
+                <div class="contato-info">
+                    <span class="contato-nome">NOAH</span>
+                    <span class="contato-detalhe">15 ANOS · VARGINHA — MG</span>
+                </div>
+
+                <div class="contato-links">
+                    <a href="mailto:hnoazk@gmail.com" class="contato-link-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        hnoazk@gmail.com
+                    </a>
+                    
+                    <a href="https://github.com/NoahHenrique" target="_blank" rel="noopener noreferrer" class="contato-link-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        github.com/NoahHenrique
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ DA PÁGINA -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                NOAH/ · VARGINHA — MG · 2026
+            </div>
+
+            <div class="footer-nav-links">
+                <a href="https://github.com/NoahHenrique" target="_blank" rel="noopener noreferrer">GITHUB →</a>
+                <a href="mailto:hnoazk@gmail.com">E-MAIL →</a>
+            </div>
+        </div>
+    </footer>
+
+    <!--
+        ======================================================================
+        JAVASCRIPT PURO
+        Controle de barra de progresso, navegação móvel, efeito tilt no hero
+        e revelação de elementos ao rolamento da tela (Intersection Observer).
+        ======================================================================
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /*
+                --------------------------------------------------------------
+                1. BARRA DE PROGRESSO DE ROLAGEM DA PÁGINA
+                Calcula a porcentagem lida da página e ajusta a largura da barra.
+                --------------------------------------------------------------
+            */
+            const progressoBarra = document.getElementById('progresso-barra');
+            
+            window.addEventListener('scroll', () => {
+                const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+                if (alturaTotal > 0) {
+                    const progresso = (window.scrollY / alturaTotal) * 100;
+                    progressoBarra.style.width = `${progresso}%`;
+                }
+            });
+
+            /*
+                --------------------------------------------------------------
+                2. MENU HAMBÚRGUER PARA DISPOSITIVOS MÓVEIS
+                Alterna a classe 'open' para exibir/ocultar a lista de navegação.
+                --------------------------------------------------------------
+            */
+            const menuBtn = document.getElementById('menu-btn');
+            const navLista = document.getElementById('nav-lista');
+
+            menuBtn.addEventListener('click', () => {
+                const aberto = navLista.classList.toggle('open');
+                menuBtn.setAttribute('aria-expanded', aberto);
+            });
+
+            // Fecha o menu móvel automaticamente ao clicar em qualquer link
+            navLista.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLista.classList.remove('open');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            /*
+                --------------------------------------------------------------
+                3. INTERAÇÃO DE INCLINAÇÃO SUAVE NO HERO (TILT EFFECT)
+                Desativado em telas sensíveis ao toque / dispositivos móveis.
+                --------------------------------------------------------------
+            */
+            const photoCard = document.getElementById('photoCard');
+            const bgBlob = document.getElementById('bgBlob');
+            const ehDispositivoPonteiro = window.matchMedia('(pointer: fine)').matches;
+
+            if (photoCard && ehDispositivoPonteiro) {
+                photoCard.addEventListener('mousemove', (e) => {
+                    const rect = photoCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left - (rect.width / 2);
+                    const y = e.clientY - rect.top - (rect.height / 2);
+
+                    const rotX = (-y / rect.height) * 10;
+                    const rotY = (x / rect.width) * 10;
+
+                    photoCard.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+                    if (bgBlob) {
+                        bgBlob.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px) scale(1.02)`;
+                    }
+                });
+
+                photoCard.addEventListener('mouseleave', () => {
+                    photoCard.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                    if (bgBlob) {
+                        bgBlob.style.transform = 'translate(0px, 0px) scale(1)';
+                    }
+                });
+            }
+
+            /*
+                --------------------------------------------------------------
+                4. REVELAÇÃO DE SEÇÕES AO ROLAR (INTERSECTION OBSERVER)
+                Respeita as preferências do sistema para redução de movimento.
+                --------------------------------------------------------------
+            */
+            const prefereReducaoMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (!prefereReducaoMovimento) {
+                const elementosReveal = document.querySelectorAll('.reveal');
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, {
+                    threshold: 0.12
+                });
+
+                elementosReveal.forEach(el => observer.observe(el));
+            } else {
+                // Se o usuário optar por redução de movimento, mostra tudo imediatamente sem animação
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            }
+        });
+    </script>
+</body>
+</html>
